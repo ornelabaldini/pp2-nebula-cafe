@@ -1,0 +1,63 @@
+CREATE TABLE mesa (
+	idMesa INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	mesaNombre varchar(10) NOT NULL,
+	cantComensal int NOT NULL,
+	disponibilidadMesa bool NOT NULL
+);
+
+CREATE TABLE cliente (
+	idCliente INT PRIMARY KEY AUTOINCREMNET NOT NULL,
+	clienteNombre varchar(50) NOT NULL,
+	clienteTelefono varchar(50) NOT NULL
+);
+
+CREATE TABLE estado (
+	idEstado INT PRIMARY KEY AUTOINCREMNET NOT NULL,
+	estadoNombre varchar(20) NOT NULL
+);
+
+CREATE TABLE producto (
+	idProducto INT PRIMARY KEY AUTOINCREMENT NOT NULL,
+	productoDescripcion varchar(50) NOT NULL,
+	productoPrecio float NOT NULL,
+);
+
+CREATE TABLE pedido (
+	idPedido INT PRIMARY KEY AUTOINCREMENT NOT NULL,
+	idClienteFK INT,
+	idEstadoFK INT,
+	idMesaFK INT,
+	pedidoPrioridad INT NOT NULL,
+	pedidoFecha DATE NOT NULL,
+	FOREIGN KEY (idClienteFK) REFERENCES cliente(idCliente),
+	FOREIGN KEY (idEstadoFK) REFERENCES estado(idEstado),
+	FOREING KEY (idMesaFK) REFERENCES mesa(idMesa)
+);
+	
+
+CREATE TABLE pedidoProducto (
+	idPedidoProducto INT PRIMARY KEY NOT NULL,
+	idProductoFK INT,
+	idPedidoFK INT,
+	cantidad INT NOT NULL,
+	precioUnitario float NOT NULL,
+	FOREING KEY (idProductoFK) REFERENCES producto(idProducto),
+	FOREING KEY (idPedidoFK) REFERENCES pedido(idPedido)
+);
+
+
+INSERT INTO cliente(clienteNombre, clienteTelefono) VALUE (
+('German', '2201454525')
+);
+
+
+
+
+
+
+
+
+
+
+
+
